@@ -1,0 +1,19 @@
+<?php
+echo "<h2>Project Management API - Batch Project</h2>";
+echo "<ul>";
+
+echo "<li><a href='batch_project/insert_project.php'>insert_project</a></li>";
+echo "<li><a href='batch_project/update_project.php'>update_project</a></li>";
+echo "<li><a href='batch_project/delete_project.php'>delete_project</a></li>";
+echo "<li><a href='batch_project/update_project_status.php'>update_project_status</a></li>";
+echo "<li><a href='batch_project/view_project.php'>view_project</a></li>";
+
+echo "<li><a href='batch_project/insert_user.php'>insert_user</a></li>";
+echo "<li><a href='batch_project/update_user.php'>update_user</a></li>";
+echo "<li><a href='batch_project/view_user.php'>view_user</a></li>";
+echo "<li><a href='batch_project/delete_user.php'>delete_user</a></li>";
+
+echo "<li><a href='batch_project/login.php'>login</a></li>";
+
+echo "</ul>";
+?>
