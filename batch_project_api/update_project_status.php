@@ -3,17 +3,59 @@ include "connect.php";
 
 $id = $_POST['id'] ?? '';
 $status = $_POST['status'] ?? '';
+$reason_for_hold = $_POST['reason_for_hold'] ?? '';
+$user_id = $_POST['user_id'] ?? ''; 
 
-if ($id && $status) {
-    $stmt = $con->prepare("UPDATE batch_project SET status=? WHERE id=?");
-    $stmt->bind_param("si", $status, $id);
-
-    if ($stmt->execute()) {
-        echo json_encode(["status" => "success", "message" => "Project status updated"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Status update failed"]);
-    }
-} else {
+if (!$id || !$status) {
     echo json_encode(["status" => "error", "message" => "Project ID and status required"]);
+    exit;
 }
+
+if ($status === "On Hold" && empty($reason_for_hold)) {
+    echo json_encode(["status" => "error", "message" => "Reason for hold is required"]);
+    exit;
+}
+
+if ($status === "Complete") {
+
+    if (empty($user_id)) {
+        echo json_encode(["status" => "error", "message" => "User ID required"]);
+        exit;
+    }
+
+    $stmt = $con->prepare("
+        UPDATE batch_project 
+        SET status='Complete',
+            approved_by_admin='Pending',
+            completion_requested_by=?
+        WHERE id=?
+    ");
+
+    $stmt->bind_param("ii", $user_id, $id);
+    $stmt->execute();
+
+    echo json_encode([
+        "status" => "success",
+        "message" => "Completion request sent. Waiting for admin approval."
+    ]);
+    exit;
+}
+
+if ($status !== "On Hold") {
+    $reason_for_hold = "";
+}
+
+$stmt = $con->prepare("
+    UPDATE batch_project 
+    SET status=?, reason_for_hold=?
+    WHERE id=?
+");
+
+$stmt->bind_param("ssi", $status, $reason_for_hold, $id);
+$stmt->execute();
+
+echo json_encode([
+    "status" => "success",
+    "message" => "Project status updated"
+]);
 ?>

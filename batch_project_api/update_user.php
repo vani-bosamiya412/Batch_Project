@@ -6,17 +6,15 @@ $name = $_POST['name'] ?? '';
 $role = $_POST['role'] ?? '';
 $email = $_POST['email'] ?? '';
 $phone_number = $_POST['phone_number'] ?? '';
-$password = $_POST['password'] ?? '';
 
 if ($id) {
-    $password_hash = $password ? password_hash($password, PASSWORD_DEFAULT) : null;
-    if ($password_hash) {
-        $stmt = $con->prepare("UPDATE batch_users SET name=?, role=?, email=?, phone_number=?, password=? WHERE id=?");
-        $stmt->bind_param("sssssi", $name, $role, $email, $phone_number, $password_hash, $id);
-    } else {
-        $stmt = $con->prepare("UPDATE batch_users SET name=?, role=?, email=?, phone_number=? WHERE id=?");
-        $stmt->bind_param("ssssi", $name, $role, $email, $phone_number, $id);
-    }
+    $stmt = $con->prepare("
+        UPDATE batch_users 
+        SET name = ?, role = ?, email = ?, phone_number = ?
+        WHERE id = ?
+    ");
+
+    $stmt->bind_param("ssssi", $name, $role, $email, $phone_number, $id);
 
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "User updated successfully"]);

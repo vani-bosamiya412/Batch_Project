@@ -3,7 +3,7 @@ include "connect.php";
 header('Content-Type: application/json; charset=utf-8');
 
 $id = $_GET['id'] ?? '';
-$cols = "id, name, role, email, phone_number";
+$cols = "id, name, role, email, phone_number, password";
 
 if ($id > 0) {
     $stmt = $con->prepare("SELECT $cols FROM batch_users WHERE id = ?");
