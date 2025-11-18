@@ -14,6 +14,14 @@ echo "<li><a href='batch_project/view_user.php'>view_user</a></li>";
 echo "<li><a href='batch_project/delete_user.php'>delete_user</a></li>";
 
 echo "<li><a href='batch_project/login.php'>login</a></li>";
+echo "<li><a href='batch_project/admin_login.php'>admin login</a></li>";
+
+echo "<li><a href='batch_project/admin_approval.php'>admin approval</a></li>";
+echo "<li><a href='batch_project/insert_or_update_notes.php'>insert or update notes</a></li>";
+
+echo "<li><a href='batch_project/forgot_password.php'>forgot password</a></li>";
+echo "<li><a href='batch_project/get_forgot_requests.php'>get forgot password requests</a></li>";
+echo "<li><a href='batch_project/reset_password.php'>reset password</a></li>";
 
 echo "</ul>";
 ?>
