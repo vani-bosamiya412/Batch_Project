@@ -10,7 +10,7 @@ $height = $_POST['height'] ?? null;
 $weight = $_POST['weight'] ?? null;
 
 if ($id) {
-    $stmt = $con->prepare("UPDATE vani_users 
+    $stmt = $conn->prepare("UPDATE vani_users 
                            SET name=?, email=?, height=?, weight=?, gender=?, date_of_birth=? 
                            WHERE id=?");
     $stmt->bind_param("ssssssi", $name, $email, $height, $weight, $gender, $dob, $id);

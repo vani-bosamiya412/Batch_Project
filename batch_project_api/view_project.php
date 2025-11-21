@@ -5,7 +5,7 @@ header('Content-Type: application/json; charset=utf-8');
 $id = $_GET['id'] ?? '';
 $status = $_GET['status'] ?? '';
 
-$cols = "id, client_name, title, description, type, status, approved_by_admin, reason_for_hold, admin_notes, members_names, start_date, end_date, completion_requested_by";
+$cols = "id, client_name, title, description, type, status, approved_by_admin, reason_for_hold, admin_notes, members_names, members_email, start_date, end_date, completion_requested_by";
 
 if ($id > 0) {
     $stmt = $con->prepare("SELECT $cols FROM batch_project WHERE id = ?");
