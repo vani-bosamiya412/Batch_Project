@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2025 at 08:40 AM
+-- Generation Time: Nov 26, 2025 at 08:04 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,29 +18,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project_management`
+-- Database: `fitness_app`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `batch_project`
+-- Table structure for table `vani_users`
 --
 
-CREATE TABLE `batch_project` (
+CREATE TABLE `vani_users` (
   `id` int(11) NOT NULL,
-  `client_name` varchar(100) NOT NULL,
-  `title` varchar(150) NOT NULL,
-  `description` text NOT NULL,
-  `type` enum('Web','Mobile Application') NOT NULL,
-  `status` enum('Pending','Complete','On Hold','Continue') NOT NULL DEFAULT 'Pending',
-  `approved_by_admin` enum('Pending','Approved','Rejected') DEFAULT 'Pending',
-  `reason_for_hold` text DEFAULT NULL,
-  `admin_notes` text DEFAULT NULL,
-  `members_names` text NOT NULL,
-  `members_email` text NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL
+  `name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `height` decimal(5,2) DEFAULT NULL,
+  `weight` decimal(5,2) DEFAULT NULL,
+  `gender` enum('male','female','other') DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -48,9 +43,9 @@ CREATE TABLE `batch_project` (
 --
 
 --
--- Indexes for table `batch_project`
+-- Indexes for table `vani_users`
 --
-ALTER TABLE `batch_project`
+ALTER TABLE `vani_users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -58,10 +53,10 @@ ALTER TABLE `batch_project`
 --
 
 --
--- AUTO_INCREMENT for table `batch_project`
+-- AUTO_INCREMENT for table `vani_users`
 --
-ALTER TABLE `batch_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `vani_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
